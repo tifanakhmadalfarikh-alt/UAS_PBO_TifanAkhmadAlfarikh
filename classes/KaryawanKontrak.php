@@ -2,19 +2,18 @@
 require_once 'Karyawan.php';
 
 class KaryawanKontrak extends Karyawan {
-    // Properti Spesifik
     private $durasiKontrakBulan;
     private $agensiPenyalur;
 
     public function __construct($id_karyawan, $nama_karyawan, $departemen, $hariKerjaMasuk, $gajiDasarPerHari, $durasiKontrakBulan, $agensiPenyalur) {
-        // Memanggil constructor dari kelas induk
         parent::__construct($id_karyawan, $nama_karyawan, $departemen, $hariKerjaMasuk, $gajiDasarPerHari);
         $this->durasiKontrakBulan = $durasiKontrakBulan;
         $this->agensiPenyalur = $agensiPenyalur;
     }
 
+    // Mengimplementasikan Overriding
     public function hitungGajiBersih() {
-        // Gaji dasar sementara (akan di-override di Tahap 5 jika ada instruksi khusus)
+        // Sistem penggajian murni berdasarkan jumlah hari kehadiran
         return $this->hariKerjaMasuk * $this->gajiDasarPerHari;
     }
 

@@ -2,7 +2,6 @@
 require_once 'Karyawan.php';
 
 class KaryawanMagang extends Karyawan {
-    // Properti Spesifik
     private $uangSakuBulanan;
     private $sertifikatKampusMerdeka;
 
@@ -12,12 +11,14 @@ class KaryawanMagang extends Karyawan {
         $this->sertifikatKampusMerdeka = $sertifikatKampusMerdeka;
     }
 
+    // Mengimplementasikan Overriding
     public function hitungGajiBersih() {
-        return $this->hariKerjaMasuk * $this->gajiDasarPerHari;
+        // Menerima potongan upah 20% (tersisa 80% dari plafon harian)
+        $totalSementara = $this->hariKerjaMasuk * $this->gajiDasarPerHari;
+        return $totalSementara * 0.80;
     }
 
     public function tampilkanProfilKaryawan() {
-        // Mengubah nilai boolean dari database menjadi teks yang mudah dibaca
         $statusSertifikat = $this->sertifikatKampusMerdeka ? "Ya" : "Tidak";
         $uangSakuFormat = number_format($this->uangSakuBulanan, 0, ',', '.');
         

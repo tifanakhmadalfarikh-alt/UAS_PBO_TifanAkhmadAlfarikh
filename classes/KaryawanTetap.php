@@ -2,7 +2,6 @@
 require_once 'Karyawan.php';
 
 class KaryawanTetap extends Karyawan {
-    // Properti Spesifik
     private $tunjanganKesehatan;
     private $opsiSahamId;
 
@@ -12,13 +11,15 @@ class KaryawanTetap extends Karyawan {
         $this->opsiSahamId = $opsiSahamId;
     }
 
+    // Mengimplementasikan Overriding
     public function hitungGajiBersih() {
-        return $this->hariKerjaMasuk * $this->gajiDasarPerHari;
+        // Mendapat tambahan tunjangan kesehatan/keluarga
+        $gajiPokok = $this->hariKerjaMasuk * $this->gajiDasarPerHari;
+        return $gajiPokok + $this->tunjanganKesehatan;
     }
 
     public function tampilkanProfilKaryawan() {
         $infoSaham = $this->opsiSahamId ? $this->opsiSahamId : "Belum Tersedia";
-        // Format angka untuk tunjangan agar tampil rapi sebagai mata uang
         $tunjanganFormat = number_format($this->tunjanganKesehatan, 0, ',', '.');
         
         return "Tunjangan Kesehatan: Rp {$tunjanganFormat} | Opsi Saham ID: {$infoSaham}";
